@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Cartoonizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <section>
+        <!-- Animated Sidebar -->
+        <div class="sidebar">
+            <div class="logo-content">
+                <div class="logo">
+                    <i class="fas fa-magic"></i>
+                    <h3 class="links-name">Cartoonizer</h3>
+                </div>
+                <i class="fas fa-bars" id="btn"></i>
+            </div>
+            <ul>
+                <li class="list-item active">
+                    <a href="#">
+                        <i class="fas fa-home"></i>
+                        <span class="links-name">Home</span>
+                    </a>
+                    <span class="tooltip">Home</span>
+                </li>
+                <li class="list-item">
+                    <a href="#">
+                        <i class="fas fa-image"></i>
+                        <span class="links-name">Gallery</span>
+                    </a>
+                    <span class="tooltip">Gallery</span>
+                </li>
+                <li>
+                    <input type="text" placeholder="Search...">
+                    <i class="fas fa-search bx-search"></i>
+                </li>
+                <li class="list-item">
+                    <a href="#">
+                        <i class="fas fa-cog"></i>
+                        <span class="links-name">Settings</span>
+                    </a>
+                    <span class="tooltip">Settings</span>
+                </li>
+                <li class="list-item list-logout">
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="links-name">Logout</span>
+                    </a>
+                    <span class="tooltip">Logout</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div id="image-container" class="floating">
+            <h1 style="color: white; margin-bottom: 20px;">Image Cartoonizer</h1>
+            
+            <form id="upload-form" enctype="multipart/form-data">
+                <input type="file" id="image-input" name="image" accept=".jpg,.jpeg,.png" required>
+                
+                <div style="margin: 30px 0;">
+                    <button type="submit" id="cartoonify-button">
+                        <i class="fas fa-magic"></i> Cartoonify!
+                    </button>
+                </div>
+                
+                <div class="loader" id="loader"></div>
+            </form>
+            
+            <div class="image-comparison">
+                <div class="image-wrapper">
+                    <img id="original-image" src="" alt="Original Image">
+                    <span class="image-label">Original</span>
+                </div>
+                <div class="image-wrapper">
+                    <img id="cartoon-image" src="" alt="Cartoon Image">
+                    <span class="image-label">Cartoon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Sidebar toggle functionality
+        document.getElementById('btn').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Active menu item highlighting
+        const listItems = document.querySelectorAll('.list-item');
+        listItems.forEach(item => {
+            item.addEventListener('click', function() {
+                listItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
